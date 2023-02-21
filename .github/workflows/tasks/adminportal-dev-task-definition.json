@@ -1,13 +1,14 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-west-1:336825270849:task-definition/aa-adminportal-dev:4",
+    "taskDefinitionArn": "arn:aws:ecs:us-west-1:676120396780:task-definition/adminportal-dev:1",
     "containerDefinitions": [
         {
-            "name": "aa-adminportal-dev",
-            "image": "336825270849.dkr.ecr.us-west-1.amazonaws.com/aa-adminportal-dev:latest",
-            "cpu": 0,
+            "name": "adminportal-dev",
+            "image": "676120396780.dkr.ecr.us-west-1.amazonaws.com/adminportal-dev",
+            "cpu": 384,
+            "memory": 384,
             "portMappings": [
                 {
-                    "name": "aa-adminportal-dev-3000-tcp",
+                    "name": "adminportal-dev-3000-tcp",
                     "containerPort": 3000,
                     "hostPort": 80,
                     "protocol": "tcp",
@@ -21,11 +22,11 @@
             "volumesFrom": []
         }
     ],
-    "family": "aa-adminportal-dev",
-    "taskRoleArn": "arn:aws:iam::336825270849:role/ecsTaskExecutionRole",
-    "executionRoleArn": "arn:aws:iam::336825270849:role/ecsTaskExecutionRole",
+    "family": "adminportal-dev",
+    "taskRoleArn": "arn:aws:iam::676120396780:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::676120396780:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
-    "revision": 4,
+    "revision": 1,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -46,13 +47,13 @@
     "requiresCompatibilities": [
         "EC2"
     ],
-    "cpu": "1024",
-    "memory": "512",
+    "cpu": "384",
+    "memory": "384",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-02-20T04:51:51.752Z",
-    "registeredBy": "arn:aws:iam::336825270849:root",
+    "registeredAt": "2023-02-21T06:46:15.170Z",
+    "registeredBy": "arn:aws:iam::676120396780:root",
     "tags": []
 }

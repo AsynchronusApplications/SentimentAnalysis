@@ -28,19 +28,19 @@ name: Deploy AdminPortal to Amazon ECS
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "develop" ]
     paths:
     - 'adminportal/**'
 
 env:
-  AWS_REGION: us-west-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: aa-adminportal-dev      # set this to your Amazon ECR repository name
-  ECS_SERVICE: aa-adminportal-dev         # set this to your Amazon ECS service name
-  ECS_CLUSTER: aa-adminportal-dev         # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: .github/workflows/tasks/aa-adminportal-dev-task-definition.json # set this to the path to your Amazon ECS task definition
-                                          # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: aa-adminportal-dev      # set this to the name of the container in the
-                                          # containerDefinitions section of your task definition
+  AWS_REGION: us-west-1               # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: adminportal-dev     # set this to your Amazon ECR repository name
+  ECS_SERVICE: adminportal-dev        # set this to your Amazon ECS service name
+  ECS_CLUSTER: DevCluster-Micro       # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: .github/workflows/tasks/adminportal-dev-task-definition.json # set this to the path to your Amazon ECS task definition
+                                      # file, e.g. .aws/task-definition.json
+  CONTAINER_NAME: adminportal-dev     # set this to the name of the container in the
+                                      # containerDefinitions section of your task definition
 
 permissions:
   contents: read
@@ -49,7 +49,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: production
+    environment: development
 
     steps:
     - name: Checkout
@@ -70,12 +70,12 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest #${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build --file .build/aa-adminportal-dev.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build --file .build/adminportal-dev.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
