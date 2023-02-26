@@ -5,6 +5,6 @@ WORKDIR /app
 
 COPY ../services/twitter-scraper/twitter_listener_proto.py ./
 
-RUN pip install requests
+RUN pip install requests boto3
 
 CMD ["python3", "./twitter_listener_proto.py"]
